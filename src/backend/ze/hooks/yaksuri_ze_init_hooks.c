@@ -217,6 +217,11 @@ int yaksuri_ze_init_hook(yaksur_gpudriver_hooks_s ** hooks)
             YAKSURI_ZEI_ZE_ERR_CHKANDJUMP(zerr, rc, fn_fail);
         }
 
+        printf("%d\n", pool_desc.pNext);
+        pool_desc.stype = ZE_STRUCTURE_TYPE_EVENT_POOL_DESC;
+        pool_desc.pNext = NULL;
+        pool_desc.flags = 0;
+        pool_desc.count = ZE_EVENT_POOL_CAP;
         /* create one event pool for each device */
         zerr = zeEventPoolCreate(yaksuri_zei_global.context, &pool_desc, 1,
                                  &yaksuri_zei_global.device[i], &device_state->ep);
